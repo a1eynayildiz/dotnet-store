@@ -1,17 +1,30 @@
 using Microsoft.EntityFrameworkCore;
+
 namespace dotnet_store.Models;
 
-/*DataContext sınıfı,Entityframework Core'un DbContext sınıfından türetilir.DbContext ile veritabanı işlemleri yapılır.*/
-public class DataContext:DbContext 
+public class DataContext : DbContext
 {
-    //yapıcı metot(constructor)
-    public DataContext(DbContextOptions<DataContext> options):base(options)
+    public DataContext(DbContextOptions<DataContext> options) : base(options)
     {
-        
+
     }
     public DbSet<Urun> Urunler { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Urun>().HasData(
+            new List<Urun>()
+            {
+                new Urun() { Id = 1, UrunAdi="Apple Watch 7", Fiyat=10000, Aktif=false},
+                new Urun() { Id = 2, UrunAdi="Apple Watch 8", Fiyat=20000, Aktif=true},
+                new Urun() { Id = 3, UrunAdi="Apple Watch 9", Fiyat=30000, Aktif=true},
+                new Urun() { Id = 4, UrunAdi="Apple Watch 10", Fiyat=40000, Aktif=false},
+                new Urun() { Id = 5, UrunAdi="Apple Watch 11", Fiyat=50000, Aktif=true},
+                new Urun() { Id = 6, UrunAdi="Apple Watch 12", Fiyat=60000, Aktif=true},
+            }
+        );
+    }
+
 }
-
-
-// //bu sınıfı kullanabilmek için bir nesne üretmeliyiz.
-// DataContext _context = new DataContext();
