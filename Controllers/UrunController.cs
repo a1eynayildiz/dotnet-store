@@ -14,7 +14,23 @@ public class UrunController : Controller
 
     public ActionResult Index()
     {
+        return View();
+    }
+
+    public ActionResult List()
+    {
         var urunler = _context.Urunler.ToList();
         return View(urunler);
+    }
+
+    public ActionResult Details(int id)
+    {
+        var urun = _context.Urunler.FirstOrDefault(u => u.Id == id);
+        if (urun == null)
+        {
+            return NotFound();
+        }
+
+        return View(urun);
     }
 }
