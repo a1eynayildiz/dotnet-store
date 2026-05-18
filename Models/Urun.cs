@@ -1,4 +1,5 @@
 namespace dotnet_store.Models;
+//urun tablomuz
 public class Urun
 {
     public int Id { get; set; }
@@ -9,6 +10,11 @@ public class Urun
     public string? Aciklama { get; set; }
     public bool Aktif { get; set; }
     public bool Anasayfa { get; set; }
+
+    public int KategoriId { get; set; } //Entity ismi+Id
+    public Kategori Kategori { get; set; } =null!; //navigation property
+
+
 }
 
 // urun1, urun2
