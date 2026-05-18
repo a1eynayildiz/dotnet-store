@@ -25,7 +25,8 @@ public class UrunController : Controller
 
     public ActionResult Details(int id)
     {
-        var urun = _context.Urunler.FirstOrDefault(u => u.Id == id);
+        // var urun = _context.Urunler.FirstOrDefault(i => i.Id == id);
+        var urun = _context.Urunler.Find(id);//sadece id'ye göre atama yapmak istersek kullanırız.
         if (urun == null)
         {
             return NotFound();
