@@ -19,7 +19,7 @@ public class UrunController : Controller
 
     public ActionResult List()
     {
-        var urunler = _context.Urunler.ToList();
+        var urunler = _context.Urunler.Where(i=>i.Aktif).ToList();
         return View(urunler);
     }
 
