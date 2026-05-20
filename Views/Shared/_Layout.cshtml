@@ -14,7 +14,9 @@
 
     <header>
         @await Html.PartialAsync("Partials/_Topbar")
-        @await Html.PartialAsync("Partials/_Navbar")
+        @await Component.InvokeAsync("Navbar");
+        
+        
     </header>
 
     <main>
@@ -22,6 +24,8 @@
     </main>
 
     @await Html.PartialAsync("Partials/_Footer")
+    @await Component.InvokeAsync("Navbar")
+    
     
     <script src="~/js/fslightbox.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
