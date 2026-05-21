@@ -17,9 +17,9 @@ public class UrunController : Controller
         return View();
     }
 
-    public ActionResult List()
+    public ActionResult List(string url)
     {
-        var urunler = _context.Urunler.Where(i=>i.Aktif).ToList();
+        var urunler = _context.Urunler.Where(i=>i.Aktif && i.Kategori.Url == url).ToList();
         return View(urunler);
     }
 
