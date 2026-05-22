@@ -27,10 +27,15 @@ public class UrunController : Controller
     {
         // var urun = _context.Urunler.FirstOrDefault(i => i.Id == id);
         var urun = _context.Urunler.Find(id);//sadece id'ye göre atama yapmak istersek kullanırız.
-        if (urun == null)
+        
+        if(urun == null)
         {
-            return NotFound();
+            return RedirectToAction("List");
         }
+
+        ViewData["BenzerUrunler"] = _context.Urunler.Where(i=>i.KategoriId == urun.KategoriId &&i.Id != id)
+        .Take(4)
+        .ToList();
 
         return View(urun);
     }
