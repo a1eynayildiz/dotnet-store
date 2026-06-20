@@ -34,7 +34,8 @@ app.MapStaticAssets();
 //urunler/elektronik
 app.MapControllerRoute(
     name:"urunler_by_kategori",
-    pattern:"urunler/{url?}",//nullable olduğundan artık urunler de eşleştirilir
+    pattern:"urunler/{url?}",//route parametresi
+    //nullable olduğundan artık urunler de eşleştirilir
     defaults: new {controller="Urun",action="List"}).WithStaticAssets();
 
 app.MapControllerRoute(

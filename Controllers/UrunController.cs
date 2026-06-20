@@ -17,10 +17,24 @@ public class UrunController : Controller
         return View();
     }
 
-    public ActionResult List(string url)
+    public ActionResult List(string url,string q) //route parametreleri url=> value
     {
-        var urunler = _context.Urunler.Where(i=>i.Aktif && i.Kategori.Url == url).ToList();
-        return View(urunler);
+        /*Query:sunucuya (backend) ne tür bir veri istediğimize dair filtre, arama veya ayar bilgisi göndermektir.*/
+        var query = _context.Urunler.Where(i=>i.Aktif).AsQueryable();
+        if (!string.IsNullOrEmpty(url))
+        {
+           //filtreleme
+           query = query.Where(i => i.Kategori.Url == url);
+        }
+
+        if (!string.IsNullOrEmpty(q))
+        {
+            query = query.Where(i => i.UrunAdi.ToLower().Contains(q.ToLower()));//Gönderdiğimiz kelime ör 8 kelime içerisinde aranır.
+        ViewData["q"]=q;
+        }
+            
+        // var urunler = _context.Urunler.Where(i=>i.Aktif && i.Kategori.Url == url).ToList();
+        return View(query.ToList());//elimizde artık bir query değil bir list var
     }
 
     public ActionResult Details(int id)
