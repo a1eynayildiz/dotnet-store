@@ -9,3 +9,6 @@ public class Kategori
 }
 
 //kategori ve urun arasında bire çok ilişki bulunuyor.Kategori açısından baktığımızda çok(List<>), Ürün açısından baktığımızda tek ilişki görmemiz gerekiyor!
+
+//entity: veritabanı tablosuna karşılık gelir.
+//model:Veri taşımak için kullanılır.
