@@ -1,5 +1,6 @@
 using dotnet_store.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotnet_store.Controllers;
 
@@ -14,7 +15,17 @@ public class UrunController : Controller
 
     public ActionResult Index()
     {
-        return View();
+        var urunler = _context.Urunler.Select(i=>new UrunGetModel
+        {
+            Id =i.Id,
+            UrunAdi=i.UrunAdi,
+            Fiyat=i.Fiyat,
+            Aktif =i.Aktif,
+            Anasayfa=i.Anasayfa,
+            KategoriAdi=i.Kategori.KategoriAdi,
+            Resim=i.Resim
+        } ).ToList();
+        return View(urunler);
     }
 
     public ActionResult List(string url,string q) //route parametreleri url=> value

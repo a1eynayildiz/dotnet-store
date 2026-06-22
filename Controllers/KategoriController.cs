@@ -39,6 +39,6 @@ public class KategoriController:Controller
         _context.Kategoriler.Add(entity);
         _context.SaveChanges();//değişiklikleri veritabanına kaydeder.
         
-        return View();
+        return RedirectToAction("Index");
     }
 }
