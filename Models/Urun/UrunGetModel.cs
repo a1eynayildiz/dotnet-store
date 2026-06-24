@@ -11,6 +11,7 @@ public class UrunGetModel
     public bool Aktif { get; set; }
     public bool Anasayfa { get; set; }
 
-    public string KategoriAdi { get; set; } =null!; 
+    public int KategoriId { get; set; }
+    public string KategoriAdi { get; set; } =null!;
 
 }

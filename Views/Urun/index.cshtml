@@ -7,7 +7,7 @@
         <div class="card shadow">
             <div class="card-header py-1 d-flex justify-content-between align-items-center">
                 <h5 class="card-title">Ürünler</h5>
-                <a href="urun-ekle.html" class="btn btn-sm btn-primary">
+                <a asp-controller="Urun" asp-action="Create" class="btn btn-sm btn-primary">
                     <i class="fa-solid fa-plus"></i>
                 </a>
             </div>
@@ -31,9 +31,12 @@
                            @foreach(var urun in Model)
                            {
                             <tr>
-                                <td>5</td>
+                                <td>@urun.Id</td>
                                 <td>
-                                    <img src="img/@urun.Resim" class="img-fluid" alt="">
+                                    @if (!string.IsNullOrEmpty(urun.Resim))
+                                    {
+                                        <img src="~/img/@urun.Resim" class="img-fluid" alt="@urun.UrunAdi">
+                                    }
                                 </td>
                                 <td>@urun.UrunAdi</td>
                                 <td>@urun.Fiyat ₺</td>
@@ -56,13 +59,18 @@
                                     {
                                         <i class="fa-solid fa-circle-xmark text-danger"></i>
                                     }
-                                    
+
                                 </td>
                                 <td>@urun.KategoriAdi</td>
-                                <td>
-                                    <a href="kategori-ekle.html" class="btn btn-primary btn-sm">
+                                <td class="d-flex gap-1">
+                                    <a asp-controller="Urun" asp-action="Edit" asp-route-id="@urun.Id" class="btn btn-primary btn-sm">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
+                                    <form asp-controller="Urun" asp-action="Delete" asp-route-id="@urun.Id" method="post" onsubmit="return confirm('Bu ürünü silmek istediğine emin misin?');">
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                            }
